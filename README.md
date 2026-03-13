@@ -54,8 +54,8 @@
 
 ```bash
 # 1. Clone repository
-git clone <repository-url>
-cd management-inventory
+git clone https://github.com/IshikawaUta/laravel-management-inventory.git
+cd laravel-management-inventory
 
 # 2. Install dependensi PHP
 composer install
