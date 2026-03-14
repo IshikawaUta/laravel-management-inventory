@@ -140,6 +140,6 @@ sudo systemctl enable apache2 mariadb
 - **Aplikasi**: [http://ishikawauta.com](http://ishikawauta.com)
 - **phpMyAdmin**: [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
 
-[PHPMyAdmin](public/img/phpmyadmin.png)
+![PHPMyAdmin](public/img/phpmyadmin.png)
 
-[Laravel](public/img/laravel.png)
+![Laravel](public/img/laravel.png)
