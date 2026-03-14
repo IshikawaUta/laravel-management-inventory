@@ -139,3 +139,7 @@ sudo systemctl enable apache2 mariadb
 ### 2. Akses Aplikasi
 - **Aplikasi**: [http://ishikawauta.com](http://ishikawauta.com)
 - **phpMyAdmin**: [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
+
+[PHPMyAdmin](public/img/phpmyadmin.png)
+
+[Laravel](public/img/laravel.png)
