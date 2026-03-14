@@ -1,0 +1,1 @@
+<?php echo "User: " . posix_getpwuid(posix_geteuid())["name"] . "<br>"; echo "Is writable: " . (is_writable("/home/ishikawauta/laravel-management-inventory/storage/framework/views") ? "YES" : "NO"); ?>

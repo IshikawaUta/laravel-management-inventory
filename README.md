@@ -69,17 +69,28 @@ cp .env.example .env
 # 5. Generate application key
 php artisan key:generate
 
-# 6. Jalankan migrasi dan seeding database
-php artisan migrate:fresh --seed
+# 6. Konfigurasi Database (.env)
+# Buat database 'laravel_inventory' di phpMyAdmin, lalu sesuaikan:
+DB_CONNECTION=mysql
+DB_DATABASE=laravel_inventory
+DB_USERNAME=root
+DB_PASSWORD=
 
-# 7. Build assets frontend
+# 7. Jalankan migrasi dan seeding database
+php artisan migrate --seed
+
+# 8. Build assets frontend
 npm run build
-
-# 8. Jalankan server
-php artisan serve
 ```
 
-Aplikasi akan berjalan di **http://127.0.0.1:8000**
+---
+
+## 🌐 Akses Aplikasi
+
+Aplikasi ini dapat diakses melalui dua cara:
+
+1.  **Production (Apache)**: [http://ishikawauta.com](http://ishikawauta.com) (Direkomendasikan)
+2.  **Development**: Jalankan `php artisan serve` dan akses [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
 ---
 
@@ -94,14 +105,46 @@ Setelah menjalankan `php artisan migrate:fresh --seed`, akun berikut tersedia:
 
 ---
 
-## 🛠️ Pengelolaan Database
+## 🛠️ Setup Database & phpMyAdmin
 
-Proyek ini telah dikonfigurasi menggunakan **MariaDB** dan dapat dikelola melalui **phpMyAdmin**.
+Proyek ini menggunakan **MariaDB** dan dapat dikelola melalui **phpMyAdmin**.
 
-### Akses phpMyAdmin
-- **URL:** [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
-- **Username:** `inventory_user`
-- **Password:** `110705`
+### Langkah Integrasi:
+1. **Buka phpMyAdmin**: Akses `http://localhost/phpmyadmin`.
+2. **Buat Database**: Buat database baru dengan nama `laravel_inventory`.
+3. **Konfigurasi .env**: Pastikan `DB_CONNECTION=mysql` dan `DB_DATABASE=laravel_inventory` sudah sesuai.
+4. **Migrasi**: Jalankan `php artisan migrate --seed`.
+
+---
+
+## 🚀 Deployment ke Apache
+
+Aplikasi ini telah dikonfigurasi menggunakan VirtualHost Apache:
+
+- **Site Domain**: `ishikawauta.com`
+- **Document Root**: `/home/ishikawauta/laravel-management-inventory/public`
+- **VirtualHost Config**: `/etc/apache2/sites-available/laravel-inventory.conf`
+
+---
+
+## ⚠️ Troubleshooting (Izin Folder)
+
+Jika Anda menemui error `tempnam()` atau permissions saat menggunakan Apache di direktori `/home`, ikuti langkah berikut:
+
+1. **Matikan ProtectHome Systemd**:
+   Secara default, Apache dilarang menulis ke direktori `/home`. Buat file override:
+   ```bash
+   sudo mkdir -p /etc/systemd/system/apache2.service.d
+   echo -e "[Service]\nProtectHome=false" | sudo tee /etc/systemd/system/apache2.service.d/override.conf
+   sudo systemctl daemon-reload
+   sudo systemctl restart apache2
+   ```
+
+2. **Atur Izin Folder Laravel**:
+   ```bash
+   sudo chown -R ishikawauta:www-data storage bootstrap/cache
+   sudo chmod -R 775 storage bootstrap/cache
+   ```
 
 ---
 
