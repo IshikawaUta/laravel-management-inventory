@@ -12,8 +12,8 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel 12">
   <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php" alt="PHP 8.2+">
-  <img src="https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite" alt="SQLite">
-  <img src="https://img.shields.io/badge/Auth-Breeze-4A90E2?style=for-the-badge" alt="Laravel Breeze">
+  <img src="https://img.shields.io/badge/Database-MySQL%2FMariaDB-4479A1?style=for-the-badge&logo=mysql" alt="MariaDB">
+  <img src="https://img.shields.io/badge/Tools-phpMyAdmin-6C78AF?style=for-the-badge&logo=phpmyadmin" alt="phpMyAdmin">
 </p>
 
 ---
@@ -36,7 +36,7 @@
 
 - **Backend:** [Laravel 12](https://laravel.com/) (PHP 8.2+)
 - **Authentication:** [Laravel Breeze](https://laravel.com/docs/starter-kits#breeze)
-- **Database:** SQLite (default) — dapat diganti MySQL/PostgreSQL
+- **Database:** MySQL/MariaDB (via phpMyAdmin)
 - **Frontend:** Blade Templates + Vanilla CSS (Glassmorphism)
 - **Icons:** Font Awesome 6
 - **Fonts:** Google Fonts — Inter
@@ -89,8 +89,19 @@ Setelah menjalankan `php artisan migrate:fresh --seed`, akun berikut tersedia:
 
 | Peran | Email | Password |
 |---|---|---|
-| **Admin** | `admin@example.com` | `password` |
+| **Admin** | `admin@admin.com` | `password` |
 | **Staff** | `staff@example.com` | `password` |
+
+---
+
+## 🛠️ Pengelolaan Database
+
+Proyek ini telah dikonfigurasi menggunakan **MariaDB** dan dapat dikelola melalui **phpMyAdmin**.
+
+### Akses phpMyAdmin
+- **URL:** [http://localhost/phpmyadmin/](http://localhost/phpmyadmin/)
+- **Username:** `inventory_user`
+- **Password:** `110705`
 
 ---
 
