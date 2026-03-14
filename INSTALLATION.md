@@ -149,6 +149,47 @@ sudo systemctl enable apache2 mariadb
 - **Aplikasi**: [http://ishikawauta.com](http://ishikawauta.com)
 - **phpMyAdmin**: [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
 
+---
+
+## 🌐 Bagian 7: Akses Lintas Jaringan (Windows & WSL)
+
+### 1. Membuat "Domain Lokal" di Windows
+Agar Anda bisa mengetik `ishikawauta.com` langsung di browser Windows:
+1. Buka **Notepad** sebagai Administrator.
+2. Buka file: `C:\Windows\System32\drivers\etc\hosts`.
+3. Tambahkan baris ini di paling bawah:
+   ```text
+   127.0.0.1   ishikawauta.com
+   ```
+
+### 2. Menggunakan Port Forwarding (Akses via IP Jaringan)
+Jika Anda ingin mengakses website dari perangkat lain di Wi-Fi yang sama:
+
+1. **Cek IP WSL** (di terminal Kali Linux):
+   ```bash
+   hostname -I
+   ```
+   *(Catat IP ini, misal: `172.20.244.62`)*
+
+2. **Setup Port Proxy** (di PowerShell Windows sebagai Administrator):
+   Ganti `<IP_WSL>` dengan IP yang Anda catat tadi.
+   ```powershell
+   netsh interface portproxy add v4tov4 listenport=80 listenaddress=0.0.0.0 connectport=80 connectaddress=<IP_WSL>
+   ```
+
+3. **Buka Firewall** (di PowerShell Windows sebagai Administrator):
+   ```powershell
+   New-NetFirewallRule -DisplayName "Akses WSL Kali" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 80
+   ```
+
+### 3. Cara Membersihkan (Clean Up)
+Jika sudah tidak digunakan, hapus aturan port forwarding agar port 80 Windows kembali tertutup:
+```powershell
+netsh interface portproxy delete v4tov4 listenport=80 listenaddress=0.0.0.0
+```
+
+---
+
 ![PHPMyAdmin](public/img/phpmyadmin.png)
 
 ![Laravel](public/img/laravel.png)
