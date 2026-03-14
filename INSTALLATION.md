@@ -105,7 +105,16 @@ sudo systemctl restart apache2
 
 ## ⚠️ Bagian 5: Troubleshooting & Izin (PENTING)
 
-### 1. Fix Systemd ProtectHome
+### 1. Fix MariaDB Socket (WSL)
+Di WSL, folder `/run/mysqld` sering hilang setelah restart. Gunakan solusi `RuntimeDirectory` agar systemd membuatnya otomatis:
+```bash
+sudo mkdir -p /etc/systemd/system/mariadb.service.d
+echo -e "[Service]\nRuntimeDirectory=mysqld\nRuntimeDirectoryMode=0755" | sudo tee /etc/systemd/system/mariadb.service.d/wsl-fix.conf
+sudo systemctl daemon-reload
+sudo systemctl restart mariadb
+```
+
+### 2. Fix Systemd ProtectHome Apache
 Secara default, Apache dilarang menulis ke folder `/home`. Matikan pembatasan ini:
 ```bash
 sudo mkdir -p /etc/systemd/system/apache2.service.d
